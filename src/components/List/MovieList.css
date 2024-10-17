@@ -1,0 +1,19 @@
+.movie-list{
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 36px; /* Расстояние между карточками */
+    padding-top: 34px;
+    padding-bottom: 36px;
+}
+
+
+.movie-list-container {
+    max-width: 1010px;
+    margin: 0 auto;
+    padding: 18px;
+}
+
+.movie-search-input{
+    padding: 9px 12px;
+    /* max-width: 938px; */
+}

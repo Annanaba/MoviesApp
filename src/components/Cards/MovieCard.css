@@ -1,49 +1,51 @@
-@font-face {
-    font-family: 'Inter'; 
-    src: url('/src/fonts/Inter-4.0/Inter.ttc') format('truetype'); /* Путь к файлу шрифта и его формат */
-    font-weight: normal;
-    font-style: normal;
-}
-
 
 p, h2 {
     margin: 0;
     font-family: 'Inter'
 }
 
-
-.movie-card{
-    width: 100%;
-    max-width: 450px;
+.ant-card .ant-card-body{
     display: flex;
-    min-height: 280px;
-  
-}
-@media (max-width: 778px){
-.ant-col-sm-12{
-    max-width: 100%;
-    flex:none;
-}
+    flex-direction: row;
+    padding: 0;
 }
 
-.img-card{
-    height: 280px; /* Задаем фиксированную высоту для изображения */
-    min-width: 180px;  /* Задаем фиксированную ширину для изображения */
-    object-fit: cover; /* Обеспечиваем корректное отображение изображения без искажения */
-  
+.img-movie{
+    width: 35%;
 }
-.movie-card .ant-card-body {
+
+.movie-details{
+    padding: 10px 5px 10px 20px;
+    width: 65%;
     display: flex;
     flex-direction: column;
-    padding: 10px 20px;
     gap: 7px;
 }
 
 .name-movie{
+    max-width: 250px;
     font-size: 20px;
     line-height: 28px;
     font-weight: 400;
 }
+
+
+.rating-circle{
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid; 
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
 
 .data-release{
     color: #827E7E;
@@ -52,14 +54,32 @@ p, h2 {
     font-weight: 400;
 }
 
-.genres{
+
+
+
+
+.genre-tag{
     font-size: 12px;
-    color: rgba(0, 0, 0, 0.65);
-    border-color: #FAFAFA;
+    margin-bottom: 3px;
+    color: #6a6a6a;
 }
+
+
 .description {
     font-size: 12px;
     line-height: 22px;
     font-weight: 400;
-    /* min-height: 129px; */
+}
+
+
+.rate{
+    margin-top: auto;
+    display: flex;
+}
+
+@media (max-width: 420px) {
+
+   
+    
+    
 }

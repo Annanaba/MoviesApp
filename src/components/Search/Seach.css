@@ -3,3 +3,8 @@
     margin: 0 auto;
     padding: 18px;
 }
+
+.movie-search-input{
+    padding: 9px 12px;
+    /* max-width: 938px; */
+}
