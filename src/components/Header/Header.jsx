@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import "./Header.css";
 
 const Header = ({ setActiveTab, activeTab}) => {
@@ -23,5 +24,10 @@ const Header = ({ setActiveTab, activeTab}) => {
         </div>
     )
 };
+
+Header.propTypes = {
+    setActiveTab: PropTypes.func.isRequired, 
+    activeTab: PropTypes.string.isRequired   
+}
 
 export default Header;

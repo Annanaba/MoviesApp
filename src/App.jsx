@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Header from "./components/Header/Header";
 import Search from "./components/Search/Search";
 import Rated from "./components/Rated/Rated";
@@ -34,7 +34,7 @@ function App() {
         </GuestSessionProvider>
         </div>
     )
-}
+};
 
 
 export default App;

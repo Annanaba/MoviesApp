@@ -1,20 +1,18 @@
 import React, { useState, useEffect, useCallback } from "react";  
 import { Input, Col, Row, Spin, Alert, Pagination } from 'antd';
 import { debounce } from 'lodash';
+import PropTypes from 'prop-types';
 import './Seach.css';
 import MovieList from "../List/MovieList";
 
 
 const Search = ({query,setQuery, results, setResults}) => {
-  // const [query, setQuery] = useState('');  // Запрос от пользователя
-  // const [movies, setMovies] = useState([]); // Найденные фильмы
   const [loading, setLoading] = useState(false); // Состояние загрузки
   const [noResults, setNoResults] = useState(false); // Нет результатов
   const [error, setError] = useState(''); // Состояние ошибки
   const [totalResults, setTotalResults] = useState(0); // Общее количество результатов
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Функция для получения фильмов
   const fetchMovies = async (searchQuery, page) => {
     if(!searchQuery) {
 
@@ -120,5 +118,12 @@ const Search = ({query,setQuery, results, setResults}) => {
       </div>
   )
 };
+Search.propTypes = {
+  query: PropTypes.string.isRequired,
+  setQuery: PropTypes.func.isRequired,
+  results: PropTypes.array.isRequired,
+  setResults: PropTypes.func.isRequired,
+};
+
 
 export default Search;

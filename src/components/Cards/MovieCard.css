@@ -10,8 +10,14 @@ p, h2 {
     padding: 0;
 }
 
+.movie-card{
+    display: flex;
+    min-height: 279px;
+}
+
 .img-movie{
     width: 35%;
+
 }
 
 .movie-details{
@@ -27,8 +33,9 @@ p, h2 {
     font-size: 20px;
     line-height: 28px;
     font-weight: 400;
+    padding-right: 10%;
+    word-wrap: break-word;
 }
-
 
 .rating-circle{
     position: absolute;
@@ -46,7 +53,6 @@ p, h2 {
     padding: 10px;
 }
 
-
 .data-release{
     color: #827E7E;
     font-size: 12px;
@@ -54,16 +60,11 @@ p, h2 {
     font-weight: 400;
 }
 
-
-
-
-
 .genre-tag{
     font-size: 12px;
     margin-bottom: 3px;
     color: #6a6a6a;
 }
-
 
 .description {
     font-size: 12px;
@@ -71,15 +72,44 @@ p, h2 {
     font-weight: 400;
 }
 
-
 .rate{
     margin-top: auto;
     display: flex;
 }
 
-@media (max-width: 420px) {
 
-   
-    
-    
+@media (max-width: 768px) {
+
+    .movie-card{
+        min-height: 245px;
+    }
+
+    .ant-card-body {
+        width: 100%;
+    }
+
+    .img-movie{
+        padding: 10px;
+        width: 20%;
+        height: 40%;
+        position: absolute;
+    }
+
+    .movie-details{
+        width: 100%;
+        padding: 10px;
+    }
+
+    .description{
+        padding-top: 10px;
+    }
+
+     .rate {
+        justify-content: flex-end;
+    }
+
+    .name-movie,.data-release, .genres{
+        padding-left: 25%;
+        
+    }
 }

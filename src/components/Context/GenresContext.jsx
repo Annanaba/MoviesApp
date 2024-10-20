@@ -7,6 +7,9 @@ export const GenresProvider = ({children}) => {
     const getGenres = async () => {
         try {
             const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.VITE_MOVIE_API_KEY}`);
+            if (!response.ok) {
+                throw new Error(`Ошибка: ${response.status} ${response.statusText}`);
+              }
             const data = await response.json();
             
             const newGenres = data.genres.reduce((acc, genre) => {
@@ -17,7 +20,7 @@ export const GenresProvider = ({children}) => {
             setGenres(newGenres);
     
         } catch (error) {
-            console.log('Ошибка при получении жанров');
+            console.log('Ошибка при получении жанров:', error);
         }
     };
     

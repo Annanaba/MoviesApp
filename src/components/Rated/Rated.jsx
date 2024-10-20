@@ -1,28 +1,29 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import { Input, Col, Row, Spin, Alert, Pagination } from 'antd';
+import { Spin, Alert, Pagination } from 'antd';
+import PropTypes from 'prop-types';
 import MovieList from "../List/MovieList";
 import './Rated.css'
 import { useGuestSession } from "../Context/GuestSessionContext";
 
 
 const Rated = () => {
-  const guestSessionId = useGuestSession(); // гостевая сессия
-  const[ratedMovies, setRatedMovies] = useState([]); // оцененные фильмы
-  const [loading, setLoading] = useState(true); // состояние загрузки 
-  const [error, setError] = useState(null); // состояние ошибки
-  const [noResults, setNoResults] = useState(false); // нет результатов
-  const [totalResults, setTotalResults] = useState(0); // общее кол-во результ
-  const [currentPage, setCurrentPage] = useState(1); // страницы
+  const guestSessionId = useGuestSession();
+  const[ratedMovies, setRatedMovies] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
+  const [noResults, setNoResults] = useState(false); 
+  const [totalResults, setTotalResults] = useState(0); 
+  const [currentPage, setCurrentPage] = useState(1);
 
 
 
-  const fetchRatedMovies = async (page = 1) =>{
+  const fetchRatedMovies = async (page= 1) =>{
     setNoResults(false);
 
      try{
       setLoading(true);
-      const response = await fetch(`https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?api_key=${import.meta.env.VITE_MOVIE_API_KEY}`);
+      const response = await fetch(`https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?api_key=${import.meta.env.VITE_MOVIE_API_KEY}&page=${page}`);
       const data = await response.json();
       if(data.results.length === 0){
         setNoResults(true)
@@ -86,5 +87,6 @@ const Rated = () => {
     </div>
   );
 };
+
 
 export default Rated;

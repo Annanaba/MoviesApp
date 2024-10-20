@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { Card, Tag, Rate } from 'antd';
 import './MovieCard.css';
 import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 import { useGuestSession } from "../Context/GuestSessionContext";
 import { RatingContext } from "../Context/RatingContext";
 import { GenresContext } from "../Context/GenresContext";
 
 
-const truncateText = (text, maxLength) => {
+const truncateText = (text, maxLength = 150) => {
   if (text.length <= maxLength) {
     return text;
   }
@@ -28,12 +29,17 @@ const formatDate = (dateString) => {
     return format(date, 'MMMM d, yyyy');
   } catch (error) {
     console.error("Invalid date value:", dateString);
-    return "Invalid date";
   }
 };
 
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({  movie = {
+  title: 'Неизвестный фильм',
+  poster_path: null,
+  release_date: 'Дата не указана',
+  overview: 'Описание отсутствует',
+  genre_ids: [],
+}  }) => { 
   const guestSessionId = useGuestSession();
   const { ratings, updateRating } = useContext(RatingContext);
   const currentRating = ratings[movie.id] || 0;
@@ -89,7 +95,7 @@ const MovieCard = ({ movie }) => {
         <img
           className="img-movie"
           alt={movie.title}
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          src={ `https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           />
        <div className="movie-details">
         <h2 className="name-movie">{movie.title}</h2>
@@ -102,13 +108,14 @@ const MovieCard = ({ movie }) => {
          </div>
          <p className="data-release">{formatDate(movie.release_date)}</p>
          <div className="genres">
-         {genreIds.map(id => (
+         {Array.isArray(genreIds) && genreIds.length > 0 ? ( genreIds.map(id => (
           <Tag key={id} className="genre-tag">
             {genres[id]}
           </Tag>
-         ))}
+          ))
+          ) :<Tag className="genre-tag">Жанры отсутствуют</Tag> }
         </div>
-      <p className="description">{truncateText(movie.overview, 150)}</p>
+      <p className="description">{truncateText(movie.overview)}</p>
         <Rate
           className="rate"
           value={currentRating}
@@ -119,6 +126,19 @@ const MovieCard = ({ movie }) => {
       </div>
     </Card>
   );
+};
+
+
+
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string,
+    poster_path: PropTypes.string,
+    release_date: PropTypes.string,
+    overview: PropTypes.string,
+    genre_ids: PropTypes.arrayOf(PropTypes.number),
+  }).isRequired,
 };
 
 export default MovieCard;
