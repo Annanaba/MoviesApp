@@ -21,6 +21,6 @@
     .movie-list{
         grid-template-columns: 1fr;
         gap:  20px;
-        padding-top: 0;
+        padding-top: 10px;
     }
 }
