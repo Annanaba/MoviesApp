@@ -11,11 +11,11 @@ const MovieList = ({ movies }) => {
   });
 
   return (
-    <div className="movie-list">
+    <li className="movie-list">
       {moviesWithImageFirst.map(movie => (
           <MovieCard key={movie.id} movie={movie} />
       ))}
-    </div>
+    </li>
   );
 };
 

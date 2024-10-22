@@ -10,7 +10,7 @@ function App() {
 
     const [activeTab, setActiveTab] = useState('search'); // активная вкалдка
     const [searchQuery, setSearchQuery] = useState(''); // запрос от пользователя
-    const [searchResults, setSearchResults] = useState([]); //результат поиска ?
+    const [searchResults, setSearchResults] = useState([]); //результат поиска 
 
 
     return (
