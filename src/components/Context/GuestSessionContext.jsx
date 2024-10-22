@@ -26,7 +26,7 @@ export const GuestSessionProvider = ({children}) => {
 
                 console.log('Гостевая сессия создана: ' , data.guest_session_id );
             } catch (error) {
-                console.error('Ошибка при создании гостевой сессии:' , guestSessionId);
+                console.error('Ошибка при создании гостевой сессии:');
             }
         };
 

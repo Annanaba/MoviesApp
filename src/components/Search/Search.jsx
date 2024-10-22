@@ -69,10 +69,15 @@ const Search = ({query,setQuery, results, setResults}) => {
 
   useEffect(() => {
     if (query) {
-      fetchMovies(query, currentPage);
+      debouncedFetchMovies(query); 
     }
-  }, [query,currentPage]);
+  
+    return () => {
+      debouncedFetchMovies.cancel();
+    };
+  }, [query, currentPage]); 
 
+  
   const handlePageChange = (page) => {
     setCurrentPage(page)
   }

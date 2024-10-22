@@ -20,23 +20,45 @@ const Rated = () => {
 
   const fetchRatedMovies = async (page= 1) =>{
     setNoResults(false);
-
-     try{
+  
+    if (!guestSessionId) {
+      console.error("Guest session ID is undefined");
+      return;
+    }
+  
+    try {
       setLoading(true);
-      const response = await fetch(`https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?api_key=${import.meta.env.VITE_MOVIE_API_KEY}&page=${page}`);
-      const data = await response.json();
-      if(data.results.length === 0){
-        setNoResults(true)
+      console.log("Fetching rated movies with session ID:", guestSessionId);
+      console.log("Using API key:", import.meta.env.VITE_MOVIE_API_KEY);
+    
+      const response = await fetch(
+        `https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?api_key=${import.meta.env.VITE_MOVIE_API_KEY}&page=${page}`
+      );
+    
+      // Проверка успешности ответа
+      console.log("Response status:", response.status, response.statusText);
+      if (!response.ok) {
+        throw new Error(`Ошибка: ${response.status} - ${response.statusText}`);
       }
-
+    
+      const data = await response.json();
+      console.log("Response data:", data);
+    
+      if (data.results.length === 0) {
+        setNoResults(true);
+      }
+    
       setRatedMovies(data.results);
       setTotalResults(data.total_results);
-    } catch(error){
-      setError('Ошибка при загрузке оценённых фильмов');
-    } finally{
+    } catch (error) {
+      console.error("Ошибка при загрузке оценённых фильмов:", error);
+      setError("Ошибка при загрузке оценённых фильмов");
+    } finally {
       setLoading(false);
     }
   };
+  
+  
   useEffect(() => {
     if(guestSessionId){
       fetchRatedMovies(currentPage);
