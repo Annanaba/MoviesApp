@@ -13,6 +13,7 @@ const Search = ({query,setQuery, results, setResults}) => {
   const [totalResults, setTotalResults] = useState(0); // Общее количество результатов
   const [currentPage, setCurrentPage] = useState(1);
 
+  console.log('API Key:', import.meta.env.VITE_MOVIE_API_KEY);
   const fetchMovies = async (searchQuery, page) => {
     if(!searchQuery) {
 
@@ -43,7 +44,7 @@ const Search = ({query,setQuery, results, setResults}) => {
       if (data.results.length === 0) {
         setNoResults(true);
       }
-
+      
 
       setResults(data.results || []);
       setTotalResults(data.total_results);
@@ -77,7 +78,7 @@ const Search = ({query,setQuery, results, setResults}) => {
     };
   }, [query, currentPage]); 
 
-  
+
   const handlePageChange = (page) => {
     setCurrentPage(page)
   }
