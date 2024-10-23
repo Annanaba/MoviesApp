@@ -28,14 +28,11 @@ const Rated = () => {
   
     try {
       setLoading(true);
-      console.log("Fetching rated movies with session ID:", guestSessionId);
-      console.log("Using API key:", import.meta.env.VITE_MOVIE_API_KEY);
     
       const response = await fetch(
         `https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?api_key=${import.meta.env.VITE_MOVIE_API_KEY}&page=${page}`
       );
     
-      // Проверка успешности ответа
       console.log("Response status:", response.status, response.statusText);
       if (!response.ok) {
         throw new Error(`Ошибка: ${response.status} - ${response.statusText}`);
@@ -71,7 +68,7 @@ const Rated = () => {
 
   return (
     <div className="rated-container">
-          {error && (
+          {error && !noResults &&(
             <Alert
               message="Ошибка"
               description={error}
@@ -96,7 +93,7 @@ const Rated = () => {
           {!loading && !noResults && ratedMovies.length > 0 && (
             <MovieList movies={ratedMovies} />
           )}
-          {!loading && !noResults && (
+          {!loading && !noResults &&  !error && (
             <Pagination
               current={currentPage} 
               total={totalResults}
