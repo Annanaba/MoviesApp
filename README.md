@@ -1,1 +1,1 @@
-https://movies-asxn0vc1l-annas-projects-6913df6a.vercel.app
+https://movies-18gypu62u-annas-projects-6913df6a.vercel.app
